@@ -23,14 +23,27 @@ describe ('Visit the website and select channel categories and article', functio
 
 	it('Choose 社區 channel',function(){
 		var channelOne = element(by.xpath("//ul[@class='menu__submenu--list']/li/a[@href='https://www.hk01.com/channel/社區']"));
+		
 
 		browser.wait(function(){
 			return channelOne.isDisplayed();
 		}, 5000, '社區 Channel is not present');
 
+
+
 		channelOne.click();
-		expect(browser.getCurrentUrl()).toEqual('https://www.hk01.com/channel/%E7%A4%BE%E5%8D%80');
-		expect(element(by.xpath("//div[@class='menu__mid--current']/a[@href='https://www.hk01.com/channel/社區']")).getText()).toEqual('社區');
+
+		var currentBrowserUrl = browser.getCurrentUrl();
+		var expectedUrl = "https://www.hk01.com/channel/%E7%A4%BE%E5%8D%80";
+
+		expect(currentBrowserUrl).toEqual(expectedUrl);
+
+
+		var sideBarElem = element(by.xpath("//div[@class='menu__mid--current']/a[@href='https://www.hk01.com/channel/社區']"));
+		var channelName = "社區";
+
+		expect(sideBarElem.getText()).toEqual(channelName);
+
 		console.log('社區 Channel was displayed');
 
 
@@ -44,9 +57,22 @@ describe ('Visit the website and select channel categories and article', functio
 			return channeltwo.isPresent();
 		},5000, '兩岸 Section is not present');
 
+		
+		
+
+
 		channeltwo.click();
-		expect(browser.getCurrentUrl()).toEqual('https://www.hk01.com/section/%E5%85%A9%E5%B2%B8');
-		expect(element(by.xpath("//div[@class='menu__mid--current']/a[@href='https://www.hk01.com/channel/兩岸']")).getText()).toEqual('兩岸');
+
+		var currentBrowserUrl = browser.getCurrentUrl();
+		var expectedUrl = "https://www.hk01.com/section/%E5%85%A9%E5%B2%B8";
+
+		expect(currentBrowserUrl).toEqual(expectedUrl);
+
+		var sideBarElem = element(by.xpath("//div[@class='menu__mid--current']/a[@href='https://www.hk01.com/channel/兩岸']"));
+		var channelName = "兩岸";
+
+		expect(sideBarElem.getText()).toEqual(channelName);
+		
 		console.log('兩岸 Section was displayed');
 		// browser.sleep(5000);
 	});
